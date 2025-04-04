@@ -2,7 +2,7 @@
 
 A modern real-time chat application built with the MERN stack (MongoDB, Express.js, React, Node.js) and Socket.io, featuring a beautiful UI with Tailwind CSS and Daisy UI.
 
-![Demo](https://gossips-mern.onrender.com/)
+[Demo](https://gossips-mern.onrender.com/)
 
 ![Chat App Demo]()
 
