@@ -25,8 +25,19 @@ app.use("/api/messages", messageRoutes);
 
 // Add a simple route for API health check
 app.get("/", (req, res) => {
-  res.json({ message: "API is running" });
+  res.json({
+    message: "API is running",
+    PORT: process.env.PORT,
+    CLIENT_URL: process.env.CLIENT_URL,
+    NODE_ENV: process.env.NODE_ENV,
+    JWT_SECRET: process.env.JWT_SECRET ? "SET" : "NOT SET",
+    MONGODB_URI: process.env.MONGODB_URI ? "SET" : "NOT SET",
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME ? "SET" : "NOT SET",
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY ? "SET" : "NOT SET",
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ? "SET" : "NOT SET",
+  });
 });
+
 // index.js (modify your server start)
 server.listen(PORT, async () => {
   console.log("server is running on PORT:" + PORT);
