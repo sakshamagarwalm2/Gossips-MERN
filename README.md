@@ -4,7 +4,7 @@ A modern real-time chat application built with the MERN stack (MongoDB, Express.
 
 [Demo](https://gossips-mern.onrender.com/)
 
-![Chat App Demo]()
+![Chat App Demo](https://github.com/sakshamagarwalm2/Gossips-MERN/blob/main/Public/Screenshot%202025-04-05%20004834.png)
 
 ## ✨ Features
 
@@ -17,8 +17,8 @@ A modern real-time chat application built with the MERN stack (MongoDB, Express.
 - ⚡ Performance optimized
 - 🛡️ Error handling (both client and server-side)
 - ☁️ Image upload with Cloudinary
-- ![Chat App Demo]()
-- ![Chat App Demo]()
+- ![Chat App Demo](https://github.com/sakshamagarwalm2/Gossips-MERN/blob/main/Public/Screenshot%202025-04-05%20004807.png)
+- ![Chat App Demo](https://github.com/sakshamagarwalm2/Gossips-MERN/blob/main/Public/Screenshot%202025-04-05%20004844.png)
 
 ## 🛠️ Tech Stack
 
@@ -30,7 +30,7 @@ A modern real-time chat application built with the MERN stack (MongoDB, Express.
 - React Router for navigation
 - Axios for API requests
 - React Hot Toast for notifications
-- ![Chat App Demo]()
+- ![Chat App Demo](https://github.com/sakshamagarwalm2/Gossips-MERN/blob/main/Public/Screenshot%202025-04-05%20004856.png)
 
 ### Backend
 - Node.js & Express.js
