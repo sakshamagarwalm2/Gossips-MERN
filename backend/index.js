@@ -29,10 +29,10 @@ let isDBConnected = false;
 let faild = false;
 
 // index.js (modify your server start)
-server.listen(PORT, async () => {
+server.listen(PORT,() => {
   console.log("server is running on PORT:" + PORT);
   try {
-    await connectDB();
+    connectDB();
     isDBConnected = true;
   } catch (error) {
     console.error("Failed to connect to database:", error);
