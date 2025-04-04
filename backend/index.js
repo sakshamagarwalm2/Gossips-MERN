@@ -23,6 +23,21 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+
+let isDBConnected = false;
+
+// index.js (modify your server start)
+server.listen(PORT, async () => {
+  console.log("server is running on PORT:" + PORT);
+  try {
+    await connectDB();
+    
+    isDBConnected = true;
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+  }
+});
+
 // Add a simple route for API health check
 app.get("/", (req, res) => {
   res.json({
@@ -35,15 +50,6 @@ app.get("/", (req, res) => {
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME ? "SET" : "NOT SET",
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY ? "SET" : "NOT SET",
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ? "SET" : "NOT SET",
+    DB_CONNECTED: isDBConnected ? "YES" : "NO"
   });
-});
-
-// index.js (modify your server start)
-server.listen(PORT, async () => {
-  console.log("server is running on PORT:" + PORT);
-  try {
-    await connectDB();
-  } catch (error) {
-    console.error("Failed to connect to database:", error);
-  }
 });
