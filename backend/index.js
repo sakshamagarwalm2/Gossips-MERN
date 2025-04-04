@@ -27,8 +27,12 @@ app.use("/api/messages", messageRoutes);
 app.get("/", (req, res) => {
   res.json({ message: "API is running" });
 });
-
-server.listen(PORT, () => {
+// index.js (modify your server start)
+server.listen(PORT, async () => {
   console.log("server is running on PORT:" + PORT);
-  connectDB();
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error("Failed to connect to database:", error);
+  }
 });
