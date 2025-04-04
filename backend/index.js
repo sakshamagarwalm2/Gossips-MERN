@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { connectDB } from "./src/lib/db.js";
+import mongoose from "mongoose"; // 👈 Directly import mongoose
 import authRoutes from "./src/routes/auth.route.js";
 import messageRoutes from "./src/routes/message.route.js";
 import { app, server } from "./src/lib/socket.js";
@@ -10,7 +10,6 @@ import { app, server } from "./src/lib/socket.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,23 +23,25 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-
+// DB status flags
 let isDBConnected = false;
 let faild = false;
 
-// index.js (modify your server start)
-server.listen(PORT,() => {
-  console.log("server is running on PORT:" + PORT);
+// Start server and connect DB
+server.listen(PORT, async () => {
+  console.log("Server is running on PORT:", PORT);
+
   try {
-    connectDB();
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    console.log("✅ MongoDB connected:", conn.connection.host);
     isDBConnected = true;
   } catch (error) {
-    console.error("Failed to connect to database:", error);
+    console.error("❌ Failed to connect to MongoDB:", error.message);
     faild = true;
   }
 });
 
-// Add a simple route for API health check
+// Health check route
 app.get("/", (req, res) => {
   res.json({
     message: "API is running",
@@ -53,6 +54,6 @@ app.get("/", (req, res) => {
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY ? "SET" : "NOT SET",
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ? "SET" : "NOT SET",
     DB_CONNECTED: isDBConnected ? "YES" : "NO",
-    FaildDB: faild ? "YES" : "NO"
+    FaildDB: faild ? "YES" : "NO",
   });
 });
