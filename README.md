@@ -43,7 +43,7 @@ A modern real-time chat application built with the MERN stack (MongoDB, Express.
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 Gossips-MERN/
 ├── frontend/
 │   ├── public/
@@ -67,7 +67,7 @@ Gossips-MERN/
 │   │   └── index.js
 │   └── .env
 └── README.md
-\`\`\`
+```
 
 ## 🚀 Getting Started
 
@@ -79,27 +79,27 @@ Gossips-MERN/
 ### Installation
 
 1. Clone the repository
-\`\`\`bash
+```bash
 git clone https://github.com/yourusername/Gossips-MERN.git
 cd Gossips-MERN
-\`\`\`
+```
 
 2. Install dependencies for backend
-\`\`\`bash
+```bash
 cd backend
 npm install
-\`\`\`
+```
 
 3. Install dependencies for frontend
-\`\`\`bash
+```bash
 cd frontend
 npm install
-\`\`\`
+```
 
 4. Set up environment variables
 
 Backend (.env):
-\`\`\`env
+```env
 PORT=3000
 NODE_ENV=development
 JWT_SECRET=your_jwt_secret
@@ -108,26 +108,26 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 CLIENT_URL=http://localhost:5173
-\`\`\`
+```
 
 Frontend (.env):
-\`\`\`env
+```env
 VITE_API_URL=http://localhost:3000
-\`\`\`
+```
 
 5. Start the development servers
 
 Backend:
-\`\`\`bash
+```bash
 cd backend
 npm run dev
-\`\`\`
+```
 
 Frontend:
-\`\`\`bash
+```bash
 cd frontend
 npm run dev
-\`\`\`
+```
 
 ## 🌟 Usage
 
