@@ -2,16 +2,16 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import mongoose from "mongoose";
 import authRoutes from "./src/routes/auth.route.js";
 import messageRoutes from "./src/routes/message.route.js";
+import { connectDB, getDBStatus } from "./src/lib/db.js";
 import { app, server } from "./src/lib/socket.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
 
-// App middleware
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -24,35 +24,21 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
-// DB status flags (must be shared outside of function)
-let isDBConnected = false;
-let failedDB = false;
-
-// Connect DB before server starts
+// Start DB and server
 const connectAndStartServer = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("✅ MongoDB connected:", conn.connection.host);
-    isDBConnected = true;
-  } catch (error) {
-    console.error("❌ MongoDB connection failed:", error.message);
-    failedDB = true;
-  }
+  await connectDB();
 
-  // Start server after DB attempt
   server.listen(PORT, () => {
-    console.log("🚀 Server is running on PORT:", PORT);
+    console.log(`🚀 Server is running on PORT: ${PORT}`);
   });
 };
 
-connectAndStartServer(); // Call this function!
+connectAndStartServer();
 
-// Health check route
+// Health check
 app.get("/", (req, res) => {
-  console.log("Health check hit. DB_CONNECTED:", isDBConnected, "FailedDB:", failedDB);
+  const { isDBConnected, failedDB } = getDBStatus();
+
   res.json({
     message: "API is running",
     PORT: process.env.PORT,
